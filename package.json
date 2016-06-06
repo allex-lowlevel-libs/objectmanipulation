@@ -1,6 +1,6 @@
 {
   "name": "allex_objectmanipulationlowlevellib",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Manipulator lib for JavaScript Object instances",
   "main": "index.js",
   "scripts": {

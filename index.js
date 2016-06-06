@@ -1,7 +1,7 @@
-function createObjectManipulators (isfunction) {
+function createObjectManipulators (typecheckers) {
   'use strict';
   function traverseShallow(entity,cb){
-    if(!isfunction(cb)){
+    if(!typecheckers.isFunction(cb)){
       return;
     }
     for(var i in entity){
@@ -14,7 +14,7 @@ function createObjectManipulators (isfunction) {
 
   function traverseShallowConditionally(entity,cb){
     var r;
-    if(!isfunction(cb)){
+    if(!typecheckers.isFunction(cb)){
       return;
     }
     for(var i in entity){
@@ -29,7 +29,7 @@ function createObjectManipulators (isfunction) {
   };
 
   function traverse(entity,cb){
-    if(!isfunction(cb)){
+    if(!typecheckers.isFunction(cb)){
       return;
     }
     for(var i in entity){
@@ -39,7 +39,7 @@ function createObjectManipulators (isfunction) {
 
   function traverseConditionally(entity,cb){
     var r;
-    if(!isfunction(cb)){
+    if(!typecheckers.isFunction(cb)){
       return;
     }
     for(var i in entity){
