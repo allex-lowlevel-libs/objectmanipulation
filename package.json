@@ -1,6 +1,6 @@
 {
   "name": "allex_objectmanipulationlowlevellib",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Manipulator lib for JavaScript Object instances",
   "main": "index.js",
   "scripts": {
@@ -15,6 +15,9 @@
     "object",
     "manipulation"
   ],
+  "devDependencies" : {
+    "allex_checkslowlevellib": "1.x"
+  },
   "author": "Andrija Petrovic <andrija.hers@gmail.com>",
   "license": "ISC",
   "bugs": {

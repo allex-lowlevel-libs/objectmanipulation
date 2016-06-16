@@ -24,7 +24,7 @@ function createExtend(typecheckers) {
           }
           extend2 (dest[i], val);
         } else {
-          dest[i] = src[i];
+          dest[i] = val;
         }
       }
     }

@@ -55,7 +55,8 @@ function createObjectManipulators (typecheckers) {
     traverseConditionally:traverseConditionally,
     traverseShallow:traverseShallow,
     traverseShallowConditionally:traverseShallowConditionally,
-    extend: require('./extend')(typecheckers)
+    extend: require('./extend')(typecheckers),
+    extendShallow: require('./extendshallow')(typecheckers)
   };
 }
 
