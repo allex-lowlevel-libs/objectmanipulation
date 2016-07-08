@@ -50,7 +50,33 @@ function createObjectManipulators (typecheckers) {
     }
   };
 
+  function _doPick (obj, ret, key) {
+    if (!(key in obj)) return;
+    ret[key] = obj[key];
+  }
+
+  function pick (obj, list) {
+    //put in new obj all props from list
+    var ret = {};
+    list.forEach (_doPick.bind(null, obj, ret));
+    return ret;
+  }
+
+  function _doPickExcept (ret, list, value, key) {
+    if (list.indexOf(key) >= 0) return;
+    ret[key] = value;
+  }
+
+  function pickExcept (obj, list){
+    //put in new obj all props but the ones from list
+    var ret = {};
+    traverse(obj, _doPickExcept.bind(null, ret, list));
+    return ret;
+  }
+
   return {
+    pick : pick,
+    pickExcept : pickExcept,
     traverse:traverse,
     traverseConditionally:traverseConditionally,
     traverseShallow:traverseShallow,
