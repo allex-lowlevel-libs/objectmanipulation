@@ -1,10 +1,14 @@
 function createObjectManipulators (typecheckers) {
   'use strict';
   function traverseShallow(entity,cb){
+    var i;
+    if (entity === null || 'object' !== typeof entity){
+      throw new Error('First parameter \'entity\' is not an object');
+    }
     if(!typecheckers.isFunction(cb)){
       return;
     }
-    for(var i in entity){
+    for(i in entity){
       if(!entity.hasOwnProperty(i)){
         continue;
       }
@@ -13,11 +17,14 @@ function createObjectManipulators (typecheckers) {
   };
 
   function traverseShallowConditionally(entity,cb){
-    var r;
+    var r,i;
+    if (entity === null || 'object' !== typeof entity ){
+      throw new Error('First parameter \'entity\' is not an object');
+    }
     if(!typecheckers.isFunction(cb)){
       return;
     }
-    for(var i in entity){
+    for(i in entity){
       if(!entity.hasOwnProperty(i)){
         continue;
       }
@@ -29,20 +36,27 @@ function createObjectManipulators (typecheckers) {
   };
 
   function traverse(entity,cb){
+    var i;
+    if (entity === null || 'object' !== typeof entity){
+      throw new Error('First parameter \'entity\' is not an object');
+    }
     if(!typecheckers.isFunction(cb)){
       return;
     }
-    for(var i in entity){
+    for(i in entity){
       cb(entity[i],i);
     }
   };
 
   function traverseConditionally(entity,cb){
-    var r;
+    var r,i;
+    if (entity === null || 'object' !== typeof entity){
+      throw new Error('First parameter \'entity\' is not an object');
+    }
     if(!typecheckers.isFunction(cb)){
       return;
     }
-    for(var i in entity){
+    for(i in entity){
       r = cb(entity[i],i);
       if(typeof r !== 'undefined'){
         return r;
@@ -56,8 +70,15 @@ function createObjectManipulators (typecheckers) {
   }
 
   function pick (obj, list) {
+    var ret;
     //put in new obj all props from list
-    var ret = {};
+    if (obj === null || 'object' !== typeof obj){
+      throw new Error('First parameter \'obj\' is not an object');
+    }
+    if (!typecheckers.isArray(list)){
+      throw new Error('Second parameter \'list\' is not an array');
+    }
+    ret = {};
     list.forEach (_doPick.bind(null, obj, ret));
     return ret;
   }
@@ -68,8 +89,15 @@ function createObjectManipulators (typecheckers) {
   }
 
   function pickExcept (obj, list){
+    var ret;
+    if (obj === null || 'object' !== typeof obj){
+      throw new Error('First parameter \'obj\' is not an object');
+    }
+    if (!typecheckers.isArray(list)){
+      throw new Error('Second parameter \'list\' is not an array');
+    }
     //put in new obj all props but the ones from list
-    var ret = {};
+    ret = {};
     traverse(obj, _doPickExcept.bind(null, ret, list));
     return ret;
   }

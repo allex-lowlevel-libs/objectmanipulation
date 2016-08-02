@@ -24,4 +24,10 @@ describe('Testing extendShallow', function () {
     expect(e).to.have.deep.property('bb[2]', 3);
     done();
   });
+  it('three deep objects (arrays)', function (done) {
+    var e = lib.extendShallow({a:5, aa: {a: 1}, bb: [4,5,6,7]}, {b:8, bb: {a: 2}}, {a: 8, bb: [1, 2, 3], aa: 'yes'});
+    expect(e).to.have.deep.property('bb[2]', 3);
+    expect(e).not.to.have.deep.property('bb[3]');
+    done();
+  });
 });
