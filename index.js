@@ -2,9 +2,11 @@ function createObjectManipulators (typecheckers) {
   'use strict';
   function traverseShallow(entity,cb){
     var i;
+    /*
     if (entity === null || 'object' !== typeof entity){
       throw new Error('First parameter \'entity\' is not an object');
     }
+    */
     if(!typecheckers.isFunction(cb)){
       return;
     }
@@ -18,9 +20,11 @@ function createObjectManipulators (typecheckers) {
 
   function traverseShallowConditionally(entity,cb){
     var r,i;
+    /*
     if (entity === null || 'object' !== typeof entity ){
       throw new Error('First parameter \'entity\' is not an object');
     }
+    */
     if(!typecheckers.isFunction(cb)){
       return;
     }
@@ -37,9 +41,11 @@ function createObjectManipulators (typecheckers) {
 
   function traverse(entity,cb){
     var i;
+    /*
     if (entity === null || 'object' !== typeof entity){
       throw new Error('First parameter \'entity\' is not an object');
     }
+    */
     if(!typecheckers.isFunction(cb)){
       return;
     }
@@ -50,9 +56,11 @@ function createObjectManipulators (typecheckers) {
 
   function traverseConditionally(entity,cb){
     var r,i;
+    /*
     if (entity === null || 'object' !== typeof entity){
       throw new Error('First parameter \'entity\' is not an object');
     }
+    */
     if(!typecheckers.isFunction(cb)){
       return;
     }
@@ -109,7 +117,8 @@ function createObjectManipulators (typecheckers) {
     traverseConditionally:traverseConditionally,
     traverseShallow:traverseShallow,
     traverseShallowConditionally:traverseShallowConditionally,
-    extend: require('./extend')(typecheckers),
+    extend: require('./extender')(require('./extend2')(typecheckers, false)),
+    extendWithConcat: require('./extender')(require('./extend2')(typecheckers, true)),
     extendShallow: require('./extendshallow')(typecheckers)
   };
 }
