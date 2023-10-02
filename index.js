@@ -110,6 +110,20 @@ function createObjectManipulators (typecheckers) {
     return ret;
   }
 
+  function hashReducer (rdcobj, val, key) {
+    rdcobj.seed = rdcobj.func(rdcobj.seed, val, key);
+  }
+  function reduceShallow (obj, func, seed) {
+    var seedobj = {seed: seed, func: func}, ret;
+    if (!typecheckers.isFunction(func)) {
+      throw new Error('Second parameter has to be a Function');
+    }
+    traverseShallow(obj, hashReducer.bind(null, seedobj));
+    ret = seedobj.seed;
+    seedobj = null;
+    return ret;
+  }
+
   return {
     pick : pick,
     pickExcept : pickExcept,
@@ -119,7 +133,8 @@ function createObjectManipulators (typecheckers) {
     traverseShallowConditionally:traverseShallowConditionally,
     extend: require('./extender')(require('./extend2')(typecheckers, false)),
     extendWithConcat: require('./extender')(require('./extend2')(typecheckers, true)),
-    extendShallow: require('./extendshallow')(typecheckers)
+    extendShallow: require('./extendshallow')(typecheckers),
+    reduceShallow: reduceShallow
   };
 }
 
